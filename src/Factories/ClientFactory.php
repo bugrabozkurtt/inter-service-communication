@@ -8,7 +8,6 @@ use BugraBozkurt\InterServiceCommunication\Enums\ServiceEndpointEnum;
 
 class ClientFactory
 {
-
     /**
      * @param string $service
      * @return HttpClient
@@ -16,17 +15,17 @@ class ClientFactory
      */
     public static function make(string $service): HttpClient
     {
-        $endpoint = ServiceEndpointEnum::all()->get($service);
+        $endpoint = ServiceEndpointEnum::tryFrom($service);
 
-        if (!$endpoint instanceof ServiceEndpointEnum) {
-            throw new ServiceNotFoundException($service);
+        if (!$endpoint) {
+            throw new ServiceNotFoundException("Service [{$service}] not found.");
         }
 
         return new HttpClient(
             $endpoint->fullUri(),
             [
-                'timeout' => config('inter_service_communication.timeout'),
-                'headers' => config('inter_service_communication.headers'),
+                'timeout' => config('inter_service_communication.timeout', 5),
+                'headers' => config('inter_service_communication.headers', []),
             ]
         );
     }

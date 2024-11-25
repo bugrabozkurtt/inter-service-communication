@@ -7,33 +7,31 @@ use Illuminate\Support\Facades\Http;
 
 class HttpClient
 {
-    public function __construct(
-        protected string $baseUri,
-        protected array $config = []
-    )
+    public function __construct(protected string $baseUri, protected array $config = [])
     {}
 
-    public function getPendingRequest(array $extraHeaders = []): PendingRequest
+    public function getPendingRequest(): PendingRequest
     {
-        $headers = array_merge(
-            $this->config['headers'] ?? [],
-            $extraHeaders
-        );
+        $headers = $this->config['headers'] ?? [];
+
+        if (request()->bearerToken()) {
+            $headers['Authorization'] = 'Bearer ' . request()->bearerToken();
+        }
 
         return Http::baseUrl($this->baseUri)
             ->timeout($this->config['timeout'] ?? 5)
             ->withHeaders($headers);
     }
 
-    public function get(string $endpoint, array $query = [], array $headers = []): array
+    public function get(string $endpoint, array $query = []): array
     {
-        $response = $this->getPendingRequest($headers)->get($endpoint, $query);
+        $response = $this->getPendingRequest()->get($endpoint, $query);
         return $response->json();
     }
 
-    public function post(string $endpoint, array $body = [], array $headers = []): array
+    public function post(string $endpoint, array $body = []): array
     {
-        $response = $this->getPendingRequest($headers)->post($endpoint, $body);
+        $response = $this->getPendingRequest()->post($endpoint, $body);
         return $response->json();
     }
 
@@ -42,5 +40,4 @@ class HttpClient
         $this->config['headers'][$key] = $value;
         return $this;
     }
-
 }

@@ -2,29 +2,38 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Enums;
 
-use Illuminate\Support\Collection;
-
 enum ServiceEndpointEnum: string
 {
-    case USER = '8080';
+    case USER = 'user';
+    case AUTH = 'auth';
+    case ORDER = 'order';
+    case CAMPAIGN = 'campaign';
 
-    case AUTH = '8081';
-    case ORDER = '8082';
-    case CAMPAIGN = '8083';
-
-    public static function all(): Collection
+    public function baseUri(): string
     {
-        return collect([
-            'user' => self::USER,
-            'order' => self::ORDER,
-            'campaign' => self::CAMPAIGN,
-            'auth' => self::AUTH,
-        ]);
+        return env(strtoupper($this->value) . '_BASE_URI', 'http://localhost');
+    }
+
+    public function port(): ?string
+    {
+        return env(strtoupper($this->value) . '_PORT', null);
     }
 
     public function fullUri(): string
     {
-        $baseUri = config('inter_service_communication.base_uri', 'http://localhost');
-        return "{$baseUri}:{$this->value}";
+        $baseUri = $this->baseUri();
+        $port = $this->port();
+
+        return $port ? "{$baseUri}:{$port}" : $baseUri;
+    }
+
+    public static function all(): array
+    {
+        return [
+            self::USER,
+            self::AUTH,
+            self::ORDER,
+            self::CAMPAIGN,
+        ];
     }
 }

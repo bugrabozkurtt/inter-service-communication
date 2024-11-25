@@ -10,17 +10,18 @@ class InterServiceCommunicationServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        ServiceEndpointEnum::all()->each(function ($port, $key) {
-            $this->app->singleton("{$key}.client", function () use ($key) {
-                return ClientFactory::make($key);
+        // Enum'dan tüm servisleri döndür ve register et
+        foreach (ServiceEndpointEnum::all() as $service) {
+            $this->app->singleton("{$service->value}.client", function () use ($service) {
+                return ClientFactory::make($service->value);
             });
-        });
+        }
     }
 
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../Config/inter_service_communication.php' => config_path('inter_service_communication.php'),
+            __DIR__ . '/Config/inter_service_communication.php' => config_path('inter_service_communication.php'),
         ], 'config');
     }
 }
