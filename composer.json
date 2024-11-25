@@ -1,0 +1,23 @@
+{
+    "name": "bugrabozkurt/inter-service-communication",
+    "description": "Inter-service communication package for Laravel 11 projects",
+    "type": "library",
+    "require": {
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "BugraBozkurt\\InterServiceCommunication\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BugraBozkurt\\InterServiceCommunication\\InterServiceCommunicationServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
