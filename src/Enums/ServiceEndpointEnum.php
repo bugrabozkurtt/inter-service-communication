@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 enum ServiceEndpointEnum: string
 {
     case USER = '8080';
+
+    case AUTH = '8081';
     case ORDER = '8082';
     case CAMPAIGN = '8083';
 
@@ -16,6 +18,7 @@ enum ServiceEndpointEnum: string
             'user' => self::USER,
             'order' => self::ORDER,
             'campaign' => self::CAMPAIGN,
+            'auth' => self::AUTH,
         ]);
     }
 
