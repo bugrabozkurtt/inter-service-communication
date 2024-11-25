@@ -14,7 +14,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "BugraBozkurt\\InterServiceCommunication\\InterServiceCommunicationServiceProvider"
+                "BugraBozkurt\\InterServiceCommunication\\Providers\\InterServiceCommunicationServiceProvider"
             ]
         }
     },
