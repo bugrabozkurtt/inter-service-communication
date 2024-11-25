@@ -20,7 +20,7 @@ class InterServiceCommunicationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/Config/inter_service_communication.php' => config_path('inter_service_communication.php'),
+            __DIR__.'/../Config/inter_service_communication.php' => config_path('inter_service_communication.php'),
         ], 'config');
     }
 }

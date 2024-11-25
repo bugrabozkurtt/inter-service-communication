@@ -22,12 +22,11 @@ class ClientFactory
             throw new ServiceNotFoundException($service);
         }
 
-        $config = config_path('inter_service_communication.');
         return new HttpClient(
             $endpoint->fullUri(),
             [
-                'timeout' => $config['timeout'] ?? 5,
-                'headers' => $config['headers'] ?? [],
+                'timeout' => config('inter_service_communication.timeout'),
+                'headers' => config('inter_service_communication.headers'),
             ]
         );
     }
