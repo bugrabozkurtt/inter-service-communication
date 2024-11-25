@@ -1,5 +1,5 @@
 {
-    "name": "bugrabozkurt/inter-service-communication",
+    "name": "bugrabozkurtt/inter-service-communication",
     "description": "Inter-service communication package for Laravel 11 projects",
     "type": "library",
     "require": {
