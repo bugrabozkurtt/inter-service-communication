@@ -21,6 +21,7 @@ enum ServiceEndpointEnum: string
 
     public function fullUri(): string
     {
-        return config('inter_service_communication.base_uri') . ':' . $this->value;
+        $baseUri = config('inter_service_communication.base_uri', 'http://localhost');
+        return "{$baseUri}:{$this->value}";
     }
 }
