@@ -10,7 +10,6 @@ class InterServiceCommunicationServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Enum'dan tüm servisleri döndür ve register et
         foreach (ServiceEndpointEnum::all() as $service) {
             $this->app->singleton("{$service->value}.client", function () use ($service) {
                 return ClientFactory::make($service->value);
