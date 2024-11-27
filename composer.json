@@ -3,6 +3,8 @@
     "description": "Inter-service communication package for Laravel 11 projects",
     "type": "library",
     "require": {
+        "laravel/framework": "^11.31",
+        "tymon/jwt-auth": "^2.1",
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.7"
     },
@@ -11,7 +13,8 @@
             "BugraBozkurt\\InterServiceCommunication\\": "src/"
         },
         "files": [
-            "src/Helpers/Tools.php"
+            "src/Helpers/Tools.php",
+            "src/Helpers/AuthHelper.php"
         ]
     },
     "extra": {

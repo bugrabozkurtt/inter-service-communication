@@ -1,5 +1,7 @@
 <?php
 
+namespace BugraBozkurt\InterServiceCommunication\Helpers;
+
 use Illuminate\Auth\AuthenticationException;
 
 if (!function_exists('customerId')) {
@@ -8,7 +10,7 @@ if (!function_exists('customerId')) {
      * Authenticated kullanıcıdan ID tespit eder.
      *
      * @return int
-     * @throws Illuminate\Auth\AuthenticationException
+     * @throws AuthenticationException
      */
     function customerId(): int
     {
