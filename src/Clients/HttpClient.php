@@ -2,7 +2,9 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Clients;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class HttpClient
@@ -23,17 +25,23 @@ class HttpClient
             ->withHeaders($headers);
     }
 
-    public function get(string $endpoint, array $query = []): array
+    /**
+     * @throws ConnectionException
+     */
+    public function get(string $endpoint, array $query = []): Response
     {
-        $response = $this->getPendingRequest()->get($endpoint, $query);
-        return $response->json();
+        return $this->getPendingRequest()->get($endpoint, $query);
     }
 
-    public function post(string $endpoint, array $body = []): array
+
+    /**
+     * @throws ConnectionException
+     */
+    public function post(string $endpoint, array $body = []): Response
     {
-        $response = $this->getPendingRequest()->post($endpoint, $body);
-        return $response->json();
+        return $this->getPendingRequest()->post($endpoint, $body);
     }
+
 
     public function withHeader(string $key, string $value): self
     {
