@@ -3,26 +3,41 @@
 namespace BugraBozkurt\InterServiceCommunication\Helpers;
 
 use Illuminate\Support\Facades\Cache;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TokenValidator
 {
     public static function validate(string $token): ?array
     {
-        try {
-            $payload = JWTAuth::setToken($token)->getPayload();
+        $payload = self::decodeToken($token);
 
-            $userId = $payload->get('sub');
-            $cachedToken = Cache::get("jwt:{$userId}");
-
-            if (!$cachedToken || $cachedToken !== $token) {
-                return null;
-            }
-
-            return $payload->toArray();
-        } catch (\Exception $e) {
+        if (!$payload || !isset($payload['sub'])) {
             return null;
         }
+
+        $userId = $payload['sub'];
+
+        $cachedToken = Cache::get("jwt:{$userId}");
+        if (!$cachedToken || $cachedToken !== $token) {
+            return null;
+        }
+
+        return $payload;
     }
 
+    private static function decodeToken(string $token): ?array
+    {
+        $parts = explode('.', $token);
+
+        if (count($parts) !== 3) {
+            return null;
+        }
+
+        $payload = json_decode(base64_decode($parts[1]), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        return $payload;
+    }
 }
