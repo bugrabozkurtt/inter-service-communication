@@ -2,11 +2,12 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Facades;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static array get(string $endpoint, array $query = [])
- * @method static array post(string $endpoint, array $body = [])
+ * @method static Response get(string $endpoint, array $query = [])
+ * @method static Response post(string $endpoint, array $body = [])
  * @method static self withHeader(string $key, string $value)
  *
  * @see \BugraBozkurt\InterServiceCommunication\Clients\HttpClient
