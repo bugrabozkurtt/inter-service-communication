@@ -13,6 +13,7 @@ class TokenValidator
     public static function validateToken(string $token): array
     {
         try {
+            config(['jwt.secret' => config('jwt.secret')]);
             $payload = JWTAuth::setToken($token)->getPayload();
 
             return $payload->toArray();

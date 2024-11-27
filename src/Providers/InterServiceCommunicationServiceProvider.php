@@ -15,12 +15,23 @@ class InterServiceCommunicationServiceProvider extends ServiceProvider
                 return ClientFactory::make($service->value);
             });
         }
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/jwt.php',
+            'jwt'
+        );
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/inter_service_communication.php',
+            'inter_service_communication'
+        );
     }
 
     public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/Config/inter_service_communication.php' => config_path('inter_service_communication.php'),
+            __DIR__ . '/Config/jwt.php' => config_path('jwt.php'),
         ], 'config');
     }
 }
