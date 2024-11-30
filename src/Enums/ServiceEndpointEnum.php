@@ -2,6 +2,8 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Enums;
 
+use BugraBozkurt\InterServiceCommunication\Enums\PortEnum;
+
 enum ServiceEndpointEnum: string
 {
     case USER = 'user';
@@ -13,10 +15,18 @@ enum ServiceEndpointEnum: string
     case PAYMENT = 'payment';
     case INVOICE = 'invoice';
 
-
-    public function port(): ?string
+    public function port(): ?int
     {
-        return PortEnum::tryFrom($this->value)->value;
+        return match ($this) {
+            self::USER => PortEnum::USER->value,
+            self::AUTH => PortEnum::AUTH->value,
+            self::PRODUCT => PortEnum::PRODUCT->value,
+            self::CAMPAIGN => PortEnum::CAMPAIGN->value,
+            self::CART => PortEnum::CART->value,
+            self::ORDER => PortEnum::ORDER->value,
+            self::PAYMENT => PortEnum::PAYMENT->value,
+            self::INVOICE => PortEnum::INVOICE->value,
+        };
     }
 
     public static function toArray(): array
