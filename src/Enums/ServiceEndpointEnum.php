@@ -2,8 +2,6 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Enums;
 
-use Illuminate\Support\Str;
-
 enum ServiceEndpointEnum: string
 {
     case USER = 'user';
@@ -13,26 +11,15 @@ enum ServiceEndpointEnum: string
     case CART = 'cart';
     case ORDER = 'order';
     case PAYMENT = 'payment';
+    case INVOICE = 'invoice';
 
-    public function baseUri(): string
-    {
-        return env(Str::upper($this->value) . '_BASE_URI', "http://{$this->value}");
-    }
 
     public function port(): ?string
     {
-        return env(Str::upper($this->value) . '_PORT', null);
+        return PortEnum::tryFrom($this->value)->value;
     }
 
-    public function fullUri(): string
-    {
-        $baseUri = $this->baseUri();
-        $port = $this->port();
-
-        return $port ? "{$baseUri}:{$port}" : $baseUri;
-    }
-
-    public static function all(): array
+    public static function toArray(): array
     {
         return [
             self::USER,
@@ -42,6 +29,7 @@ enum ServiceEndpointEnum: string
             self::CART,
             self::ORDER,
             self::PAYMENT,
+            self::INVOICE,
         ];
     }
 }

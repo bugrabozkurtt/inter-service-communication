@@ -15,15 +15,16 @@ class ClientFactory
      */
     public static function make(string $service): HttpClient
     {
-        $endpoint = ServiceEndpointEnum::tryFrom($service);
+        $serviceName = ServiceEndpointEnum::tryFrom($service);
 
-        if (!$endpoint) {
+        if (!$serviceName) {
             throw new ServiceNotFoundException("Service [{$service}] not found.");
         }
 
+
         return new HttpClient(
-            $endpoint->fullUri(),
-            [
+            baseUri: config('inter_service_communication.base_uri', 'http://localhost') . ':' . $serviceName->port(),
+            config: [
                 'timeout' => config('inter_service_communication.timeout', 5),
                 'headers' => config('inter_service_communication.headers', []),
             ]

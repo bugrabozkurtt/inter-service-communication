@@ -6,8 +6,8 @@ use Exception;
 
 class ServiceNotFoundException extends Exception
 {
-    public function __construct(string $service)
+    public function __construct(string $message)
     {
-        parent::__construct("Service [$service] not found in the configuration.");
+        parent::__construct($message);
     }
 }

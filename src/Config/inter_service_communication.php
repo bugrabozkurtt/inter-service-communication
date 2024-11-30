@@ -5,4 +5,5 @@ return [
     'headers' => [
         'Accept' => 'application/json',
     ],
+    'base_path' => env('SERVICES_BASE_PATH', 'docker.for.mac.localhost'),
 ];
