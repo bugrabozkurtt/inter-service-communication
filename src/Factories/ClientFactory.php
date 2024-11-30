@@ -23,7 +23,7 @@ class ClientFactory
 
 
         return new HttpClient(
-            baseUri: config('inter_service_communication.base_uri', 'http://localhost') . ':' . $serviceName->port(),
+            baseUri: config('inter_service_communication.base_path', 'http://localhost') . ':' . $serviceName->port(),
             config: [
                 'timeout' => config('inter_service_communication.timeout', 5),
                 'headers' => config('inter_service_communication.headers', []),
