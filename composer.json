@@ -1,4 +1,5 @@
 {
+    "version": "1.0.0",
     "name": "bugrabozkurtt/inter-service-communication",
     "description": "Inter-service communication package for Laravel 11 projects",
     "type": "library",
@@ -24,6 +25,6 @@
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
