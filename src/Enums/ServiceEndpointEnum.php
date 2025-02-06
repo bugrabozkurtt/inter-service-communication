@@ -2,18 +2,15 @@
 
 namespace BugraBozkurt\InterServiceCommunication\Enums;
 
-use BugraBozkurt\InterServiceCommunication\Enums\PortEnum;
-
 enum ServiceEndpointEnum: string
 {
     case USER = 'user';
     case AUTH = 'auth';
     case PRODUCT = 'product';
-    case CAMPAIGN = 'campaign';
+    case STOCK = 'stock';
     case CART = 'cart';
     case ORDER = 'order';
-    case PAYMENT = 'payment';
-    case INVOICE = 'invoice';
+    case CAMPAIGN = 'campaign';
 
     public function port(): ?int
     {
@@ -21,11 +18,10 @@ enum ServiceEndpointEnum: string
             self::USER => PortEnum::USER->value,
             self::AUTH => PortEnum::AUTH->value,
             self::PRODUCT => PortEnum::PRODUCT->value,
-            self::CAMPAIGN => PortEnum::CAMPAIGN->value,
+            self::STOCK => PortEnum::STOCK->value,
             self::CART => PortEnum::CART->value,
             self::ORDER => PortEnum::ORDER->value,
-            self::PAYMENT => PortEnum::PAYMENT->value,
-            self::INVOICE => PortEnum::INVOICE->value,
+            self::CAMPAIGN => PortEnum::CAMPAIGN->value
         };
     }
 
@@ -35,11 +31,10 @@ enum ServiceEndpointEnum: string
             self::USER,
             self::AUTH,
             self::PRODUCT,
-            self::CAMPAIGN,
+            self::STOCK,
             self::CART,
             self::ORDER,
-            self::PAYMENT,
-            self::INVOICE,
+            self::CAMPAIGN
         ];
     }
 }

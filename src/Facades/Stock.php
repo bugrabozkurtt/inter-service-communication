@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \BugraBozkurt\InterServiceCommunication\Clients\HttpClient
  */
-class Invoice extends Facade
+class Stock extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'invoice.client';
+        return 'stock.client';
     }
 }
